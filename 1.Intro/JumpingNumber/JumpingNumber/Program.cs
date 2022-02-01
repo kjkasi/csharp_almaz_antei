@@ -8,65 +8,46 @@ namespace JumpingNumber
 {
     internal class Program
     {
+        static string Test(int num)
+        {
+            string str1 = num.ToString();
+            string result = "Jumping!!";
+
+            if (str1.Length > 1)
+            {
+                for (int i = 1; i < str1.Length; i++)
+                {
+                    string char1 = str1.Substring(i - 1, 1);
+                    string char2 = str1.Substring(i, 1);
+
+                    int int1 = Convert.ToInt32(char1);
+                    int int2 = Convert.ToInt32(char2);
+                    int compare = Math.Abs(int1 - int2);
+
+                    if (compare != 1)
+                    {
+                        result = "Not!!";
+                    }
+                }
+            }
+
+            Console.WriteLine(str1);
+            Console.WriteLine(result);
+            Console.WriteLine();
+            //Console.ReadKey();
+            return result;
+        }
+
         static void Main(string[] args)
         {
-            /*
-                Definition
-                Jumping number is the number that All adjacent digits in it differ by 1.
-
-                Task
-
-                Given a number, Find if it is Jumping or not .
-                Warm - up(Highly recommended)
-                Playing With Numbers Series
-
-                Notes
-
-                Number passed is always Positive .
-                Return the result as String.
-                The difference between ‘9’ and ‘0’ is not considered as 1.
-                All single digit numbers are considered as Jumping numbers.
-
-                Input >> Output Examples
-
-                jumpingNumber(9) ==> return "Jumping!!"
-
-                Explanation:
-                It's single-digit number
-
-                jumpingNumber(79) ==> return "Not!!"
-
-                Explanation:
-                Adjacent digits don't differ by 1
-
-                jumpingNumber(23) ==> return "Jumping!!"
-
-                Explanation:
-                Adjacent digits differ by 1
-
-                jumpingNumber(556847) ==> return "Not!!"
-
-                Explanation:
-
-                Adjacent digits don't differ by 1
-
-                jumpingNumber(4343456) ==> return "Jumping!!"
-
-                Explanation:
-
-                Adjacent digits differ by 1
-
-                jumpingNumber(89098) ==> return "Not!!"
-
-                Explanation:
-
-                Adjacent digits don't differ by 1
-
-                jumpingNumber(32) ==> return "Jumping!!"
-
-                Explanation:
-
-                Adjacent digits differ by 1
+            Test(9);
+            Test(79);
+            Test(23);
+            Test(556847);
+            Test(4343456);
+            Test(89098);
+            Test(32);
+            Console.ReadKey();
         }
     }
 }
