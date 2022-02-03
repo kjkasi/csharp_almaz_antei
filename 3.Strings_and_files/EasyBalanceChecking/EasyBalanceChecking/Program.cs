@@ -11,7 +11,6 @@ namespace EasyBalanceChecking
     {
         static string Test(string book)
         {
-            //int count = 0;
             double balance = 0;
             double total = 0;
             double average = 0;
@@ -24,8 +23,13 @@ namespace EasyBalanceChecking
             {
                 string str = lines[i];
                 str = str.Replace("!", " ");
+                str = str.Replace("?", " ");
                 str = str.Replace(":", " ");
+                str = str.Replace(";", " ");
+                str = str.Replace(",", " ");
                 str = str.Replace("=", " ");
+                str = str.Replace("{", " ");
+                str = str.Replace("}", " ");
                 str = str.Trim();
                 str = str.Replace(" ", ":");
                 str = str.Replace("::::", ":");
@@ -64,8 +68,13 @@ namespace EasyBalanceChecking
         }
         static void Main(string[] args)
         {
+            string b1 = "1000.00 !=\n125 Market !=:125.45\n126 Hardware = 34.95\n127 Video! 7.45\n128 Book: 14.32\n129 Gasoline::16.10";
+            String b2 = "1233.00\n125 Hardware;! 24.80?\n123 Flowers 93.50;\n127 Meat 120.90\n120 Picture 34.00\n124 Gasoline 11.00\n" +
+                    "123 Photos;! 71.40?\n122 Picture 93.50\n132 Tyres;! 19.00,?;\n129 Stamps; 13.60\n129 Fruits{} 17.60\n129 Market;! 128.00?\n121 Gasoline;! 13.60?";
 
-            string test = Test("1000.00 !=\n125 Market !=:125.45\n126 Hardware = 34.95\n127 Video! 7.45\n128 Book: 14.32\n129 Gasoline::16.10");
+            Console.WriteLine(Test(b1));
+            Console.WriteLine(Test(b2));
+
             Console.ReadKey();
         }
     }
