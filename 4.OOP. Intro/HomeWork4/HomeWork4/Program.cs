@@ -10,50 +10,51 @@ namespace HomeWork4
     {
         public int numerator;
         public int denominator;
-        public string number;
         public FractionNumber(int numerator = 0, int denominator = 0)
         {
             this.numerator = numerator;
             this.denominator = denominator;
         }
 
-        public string Show()
+        public override string ToString()
         {
-            return $"{numerator},{denominator}";
+            return $"{numerator}/{denominator} or {(double)numerator/denominator}";
         }
 
-        public static double Addition(FractionNumber a, FractionNumber b)
+        public static FractionNumber Addition(FractionNumber fractA, FractionNumber fractB)
         {
-            string strA = a.Show();
-            string strB = b.Show();
-            double numA = double.Parse(strA);
-            double numB = double.Parse(strB);
-            return numA + numB;
+            int numerator = fractA.numerator * fractB.denominator + fractB.numerator * fractA.denominator;
+            int denominator = fractA.denominator * fractB.denominator;
+            return new FractionNumber(numerator, denominator);
         }
 
-        public static double Subtraction(FractionNumber a, FractionNumber b)
+        public static FractionNumber Subtraction(FractionNumber fractA, FractionNumber fractB)
         {
-            double numA = double.Parse(a.Show());
-            double numB = double.Parse(b.Show());
-            return numA - numB;
+            int numerator = fractA.numerator * fractB.denominator - fractB.numerator * fractA.denominator;
+            int denominator = fractA.denominator * fractB.denominator;
+            return new FractionNumber(numerator, denominator);
         }
-        public static double Multiplication(FractionNumber a, FractionNumber b)
+        
+        public static FractionNumber Multiplication(FractionNumber fractA, FractionNumber fractB)
         {
-            double numA = double.Parse(a.Show());
-            double numB = double.Parse(b.Show());
-            return numA * numB;
+            int numerator = fractA.numerator * fractB.numerator;
+            int denominator = fractA.denominator * fractB.denominator;
+            return new FractionNumber(numerator, denominator);
         }
-        public static double Devision(FractionNumber a, FractionNumber b)
+
+        public static FractionNumber Devision(FractionNumber fractA, FractionNumber fractB)
         {
-            double numA = double.Parse(a.Show());
-            double numB = double.Parse(b.Show());
-            return numA / numB;
+            int numerator = fractA.numerator / fractB.numerator;
+            int denominator = fractA.denominator / fractB.denominator;
+            if (denominator == 0)
+                throw new DivideByZeroException();
+            else
+                return new FractionNumber(numerator, denominator);
         }
-        public static bool Comparison(FractionNumber a, FractionNumber b)
+
+        public static bool Comparison(FractionNumber fractA, FractionNumber fractB)
         {
-            double numA = double.Parse(a.Show());
-            double numB = double.Parse(b.Show());
-            return numA == numB ? true : false;
+            return fractA.numerator * fractB.denominator == fractB.numerator * fractA.denominator;
         }
     }
 
@@ -61,14 +62,13 @@ namespace HomeWork4
     {
         static void Main(string[] args)
         {
-            FractionNumber numA = new FractionNumber(1, 1);
-            FractionNumber numB = new FractionNumber(2, 1);
-            Console.WriteLine(numA.Show());
-            Console.WriteLine(numB.Show());
-            Console.WriteLine(FractionNumber.Addition(numA, numB));
-            Console.WriteLine(FractionNumber.Subtraction(numA, numB));
-            Console.WriteLine(FractionNumber.Multiplication(numA, numB));
-            Console.WriteLine(FractionNumber.Devision(numA, numB));
+
+            Console.WriteLine($"1/2 == 3/4 = {FractionNumber.Comparison(new FractionNumber(1, 2), new FractionNumber(3, 4))}");
+            Console.WriteLine($"1/2 == 1/2 = {FractionNumber.Comparison(new FractionNumber(1, 2), new FractionNumber(1, 2))}");
+            Console.WriteLine($"2/4 + 1/2 = {FractionNumber.Addition(new FractionNumber(2, 4), new FractionNumber(1, 2))}");
+            Console.WriteLine($"2/4 - 1/2 = {FractionNumber.Subtraction(new FractionNumber(2, 4), new FractionNumber(1, 2))}");
+            Console.WriteLine($"2/4 * 1/2 = {FractionNumber.Multiplication(new FractionNumber(2, 4), new FractionNumber(1, 2))}");
+            Console.WriteLine($"2/4 / 1/2 = {FractionNumber.Devision(new FractionNumber(2, 4), new FractionNumber(1, 2))}");;
 
             Console.ReadKey();
         }
