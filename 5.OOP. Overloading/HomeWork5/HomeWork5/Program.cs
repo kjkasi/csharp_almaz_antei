@@ -9,6 +9,7 @@ namespace HomeWork5
     class Matrix
     {
         private int[,] items;
+
         public int rows
         {
             get
@@ -16,59 +17,149 @@ namespace HomeWork5
                 return items.GetUpperBound(0) + 1;
             }
         }
+
         public int cols
         {
             get
             {
-                return items.Length / rows;
+                return items.GetUpperBound(1) + 1;
             }
         }
+
         public Matrix(int[,] items)
         {
             this.items = items;
         }
-        public void Show()
+
+        public override string ToString()
         {
-            //int rows = items.GetUpperBound(0) + 1;
-            //int cols = items.Length / rows;
+            string str = "";
 
             for (int i = 0; i < rows; i++)
             {
                 for (int j = 0; j < cols; j++)
                 {
-                    Console.Write($"{items[i,j]} \t");
+                   str += $"{items[i, j]} \t";
                 }
-                Console.WriteLine();
+                str += "\n";
             }
+
+            return str;
         }
+        
         public static Matrix operator + (Matrix mtrx1, Matrix mtrx2)
         {
             int[,] result = new int[mtrx1.rows, mtrx1.cols];
 
-            for (int i = 0; i < mtrx1.Length; i++)
+            for (int i = 0; i < mtrx1.rows; i++)
             {
-                int[] arr = new int[mtrx1[i].Length];
-                for (int j = 0; j < mtrx1[i].Length; j++)
+                for (int j = 0; j < mtrx1.cols; j++)
                 {
-                    arr[j] = arr1[i][j] + arr2[i][j];
+                    result[i, j] = mtrx1.items[i, j] + mtrx2.items[i, j];
                 }
-                result[i] = arr;
             }
 
-            return result;
-            return
+            return new Matrix(result);
         }
+
+        public static Matrix operator *(Matrix mtrx1, Matrix mtrx2)
+        {
+            int[,] result = new int[mtrx1.rows, mtrx2.cols];
+
+            for (int i = 0; i < mtrx1.rows; i++)
+            {
+                for (int j = 0; j < mtrx2.cols; j++)
+                {
+                    for (int k = 0; k < mtrx1.cols; k++)
+                    {
+                        result[i, j] += mtrx1.items[i, k] * mtrx2.items[k, j];
+                    }
+                }
+            }
+            return new Matrix(result);
+        }
+
+        public static bool operator ==(Matrix mtrx1, Matrix mtrx2)
+        {
+            bool result = true;
+
+            for (int i = 0; i < mtrx1.rows; i++)
+            {
+                for (int j = 0; j < mtrx2.cols; j++)
+                {
+                    for (int k = 0; k < mtrx1.cols; k++)
+                    {
+                        result = mtrx1.items[i, k] == mtrx2.items[k, j];
+                    }
+                }
+            }
+            return result;
+        }
+
+        public static bool operator !=(Matrix mtrx1, Matrix mtrx2)
+        {
+            bool result = true;
+
+            for (int i = 0; i < mtrx1.rows; i++)
+            {
+                for (int j = 0; j < mtrx2.cols; j++)
+                {
+                    for (int k = 0; k < mtrx1.cols; k++)
+                    {
+                        result = mtrx1.items[i, k] != mtrx2.items[k, j];
+                    }
+                }
+            }
+            return result;
+        }
+
+        public static Matrix Transpose(Matrix mtrx)
+        {
+            int[,] result = new int[mtrx.cols, mtrx.rows];
+
+            for (int i = 0; i < mtrx.rows; i++)
+            {
+                for (int j = 0; j < mtrx.cols; j++)
+                {
+                    result[j, i] = mtrx.items[i, j];
+                }
+            }
+
+            return new Matrix(result);
+        }
+
     }
+
     class Program
     {
         static void Main(string[] args)
         {
-            int[,] arr1 = { { 1, 1, 1 }, { 1, 1, 1 } };
-            int[,] arr2 = { { 1, 1, 1 }, { 1, 1, 2 } };
+            int[,] arr1 = { { 1, 1 }, { 1, 1 } };
+            int[,] arr2 = { { 1, 1 }, { 1, 2 } };
+            int[,] arr3 = { { 1, 1, 1 }, { 2, 2, 2 } };
+
             Matrix mtrx1 = new Matrix(arr1);
             Matrix mtrx2 = new Matrix(arr2);
-            mtrx1.Show();
-            mtrx2.Show();
+            Matrix mtrx3 = new Matrix(arr3);
+            Console.WriteLine(mtrx1);
+            Console.WriteLine(mtrx2);
+
+            Matrix mtrxAdd = mtrx1 + mtrx2;
+            Console.WriteLine(mtrxAdd);
+
+            Matrix mtrxMulti = mtrx1 * mtrx2;
+            Console.WriteLine(mtrxMulti);
+
+            Console.WriteLine($"{mtrx1 == mtrx1}");
+            Console.WriteLine($"{mtrx1 == mtrx2}");
+            Console.WriteLine($"{mtrx1 != mtrx1}");
+            Console.WriteLine($"{mtrx1 != mtrx2}");
+
+            Console.WriteLine();
+
+            Console.WriteLine(mtrx3);
+            Console.WriteLine($"{Matrix.Transpose(mtrx3)}");
+
             Console.ReadKey();
         }
     }
