@@ -141,24 +141,24 @@ namespace HomeWork5
             Matrix mtrx1 = new Matrix(arr1);
             Matrix mtrx2 = new Matrix(arr2);
             Matrix mtrx3 = new Matrix(arr3);
-            Console.WriteLine(mtrx1);
-            Console.WriteLine(mtrx2);
+
+            Console.WriteLine($"Исходная матрица A\n{mtrx1}");
+            Console.WriteLine($"Исходная матрица B\n{mtrx2}");
+            Console.WriteLine($"Исходная матрица C\n{mtrx3}");
 
             Matrix mtrxAdd = mtrx1 + mtrx2;
-            Console.WriteLine(mtrxAdd);
+            Console.WriteLine($"Сложение A + B\n{mtrxAdd}");
 
             Matrix mtrxMulti = mtrx1 * mtrx2;
-            Console.WriteLine(mtrxMulti);
+            Console.WriteLine($"Умножение A * B\n{mtrxMulti}");
 
-            Console.WriteLine($"{mtrx1 == mtrx1}");
-            Console.WriteLine($"{mtrx1 == mtrx2}");
-            Console.WriteLine($"{mtrx1 != mtrx1}");
-            Console.WriteLine($"{mtrx1 != mtrx2}");
+            Console.WriteLine($"Сравнение A == A\n{mtrx1 == mtrx1}");
+            Console.WriteLine($"Сравнение A == B\n{mtrx1 == mtrx2}");
+            Console.WriteLine($"Сравнение A != A\n{mtrx1 != mtrx1}");
+            Console.WriteLine($"Сравнение A != B\n{mtrx1 != mtrx2}");
 
             Console.WriteLine();
-
-            Console.WriteLine(mtrx3);
-            Console.WriteLine($"{Matrix.Transpose(mtrx3)}");
+            Console.WriteLine($"Транспонирование C\n{Matrix.Transpose(mtrx3)}");
 
             Console.ReadKey();
         }
