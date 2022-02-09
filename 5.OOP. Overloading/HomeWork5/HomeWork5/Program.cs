@@ -10,6 +10,14 @@ namespace HomeWork5
     {
         private int[,] items;
 
+        public int this[int i, int j]
+        {
+            get
+            {
+                return items[i, j];
+            }
+        }
+
         public int rows
         {
             get
@@ -55,7 +63,7 @@ namespace HomeWork5
             {
                 for (int j = 0; j < mtrx1.cols; j++)
                 {
-                    result[i, j] = mtrx1.items[i, j] + mtrx2.items[i, j];
+                    result[i, j] = mtrx1[i, j] + mtrx2[i, j];
                 }
             }
 
@@ -72,7 +80,7 @@ namespace HomeWork5
                 {
                     for (int k = 0; k < mtrx1.cols; k++)
                     {
-                        result[i, j] += mtrx1.items[i, k] * mtrx2.items[k, j];
+                        result[i, j] += mtrx1[i, k] * mtrx2[k, j];
                     }
                 }
             }
@@ -89,7 +97,7 @@ namespace HomeWork5
                 {
                     for (int k = 0; k < mtrx1.cols; k++)
                     {
-                        result = mtrx1.items[i, k] == mtrx2.items[k, j];
+                        result = mtrx1[i, k] == mtrx2[k, j];
                     }
                 }
             }
@@ -106,7 +114,7 @@ namespace HomeWork5
                 {
                     for (int k = 0; k < mtrx1.cols; k++)
                     {
-                        result = mtrx1.items[i, k] != mtrx2.items[k, j];
+                        result = mtrx1[i, k] != mtrx2[k, j];
                     }
                 }
             }
@@ -121,7 +129,7 @@ namespace HomeWork5
             {
                 for (int j = 0; j < mtrx.cols; j++)
                 {
-                    result[j, i] = mtrx.items[i, j];
+                    result[j, i] = mtrx[i, j];
                 }
             }
 
