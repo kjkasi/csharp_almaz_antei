@@ -10,7 +10,7 @@ namespace HomeWork8.Figures
     {
         public override string ToString()
         {
-            return "PAWN";
+            return "PAWN"; //♙
         }
         public override void Step()
         {

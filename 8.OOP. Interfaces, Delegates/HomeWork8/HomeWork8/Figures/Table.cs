@@ -16,6 +16,30 @@ namespace HomeWork8.Figures
 
             Random rnd = new Random();
 
+            //1 bishop
+            //2 king
+            //3 knight
+            //4 pawn
+            //5 queen
+            //6 rook
+
+            Figure[] arr = { new Bishop(), new King(), new Knight(), new Pawn(), new Queen(), new Rook() };
+
+            foreach (Figure item in arr)
+            {
+                bool isNull = true;
+                while (isNull)
+                {
+                    int x = rnd.Next(0, 7);
+                    int y = rnd.Next(0, 7);
+
+                    if (items[x, y] is null)
+                    {
+                        isNull = false;
+                        items[x, y] = item;
+                    }
+                }
+            }
             
         }
         public int rows
@@ -36,7 +60,7 @@ namespace HomeWork8.Figures
 
         public override string ToString()
         {
-            string str = "";
+            /*string str = "";
 
             for (int i = 0; i < rows; i++)
             {
@@ -48,6 +72,7 @@ namespace HomeWork8.Figures
             }
 
             return str;
+            */
         }
     }
 }
