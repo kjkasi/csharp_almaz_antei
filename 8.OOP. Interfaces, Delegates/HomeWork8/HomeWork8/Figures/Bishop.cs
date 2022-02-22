@@ -12,15 +12,6 @@ namespace HomeWork8.Figures
         {
             return $"BISHOP({x},{y})";
         }
-        public override void Step(int x, int y)
-        {
-            if (del?.Invoke(this, x, y) == true)
-            {
-                this.x = x;
-                this.y = y;
-            }
-
-        }
 
     }
 }

@@ -8,21 +8,27 @@ namespace HomeWork8
 {
     abstract class Figure
     {
-        public delegate bool FigureStateHandler(Figure figure, int x, int y);
+        public delegate bool FigureStateHandler(Figure figure, int newX, int newY);
 
         public FigureStateHandler del { get; set; }
 
         public int x { get; set; }
 
         public int y { get; set; }
-        //public int Y
-        //{
-        //    get { return this.y; }
-        //}
 
-        public abstract void Step(int x, int y);
+        public bool Step(int x, int y)
+        {
+            bool result = del.Invoke(this, x, y);
+            if  (result == true)
+            {
+                this.x = x;
+                this.y = y;
+            }
+            return result;
 
-        public void RegisterHendler(FigureStateHandler del)
+        }
+
+        public void RegisterHandler(FigureStateHandler del)
         {
             this.del = del;
         }

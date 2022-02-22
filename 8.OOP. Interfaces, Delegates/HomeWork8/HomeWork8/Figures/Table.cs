@@ -8,27 +8,35 @@ namespace HomeWork8.Figures
 {
     class Table
     {
-        private Figure[,] items;
+        private Figure[,] cells;
+
+        public Figure[] figures = { new Bishop(), new Rook(), new Queen(), new Knight(), new King(), new Pawn() };
 
         public Table()
         {
-            items = new Figure[8, 8];
+            cells = new Figure[8, 8];
 
             Random rnd = new Random();
 
-            Bishop bishop = new Bishop();
-            bishop.RegisterHendler(TestHandler);
-            bishop.Step(1, 1);
+            foreach(Figure figure in figures)
+            {
+                bool result = false;
+                while (result == false)
+                {
+                    int x = rnd.Next(0, 7);
+                    int y = rnd.Next(0, 7);
+                    figure.RegisterHandler(StepHandler);
+                    result = figure.Step(x, y);
+                }
+            }
         }
 
-        public bool TestHandler(Figure figure, int x, int y)
+        public bool StepHandler(Figure figure, int newX, int newY)
         {
-            Console.WriteLine($"{x}, {y}");
-            if (items[x, y] is null)
+            if (cells[newX, newY] is null)
             {
-                //Array.IndexOf(items, figure);
-                items.
-                items[x, y] = figure;
+                cells[newX, newY] = figure;
+                cells[figure.x, figure.y] = null;
                 return true;
             }
             else
@@ -41,7 +49,7 @@ namespace HomeWork8.Figures
         {
             get
             {
-                return items.GetUpperBound(0) + 1;
+                return cells.GetUpperBound(0) + 1;
             }
         }
 
@@ -49,7 +57,7 @@ namespace HomeWork8.Figures
         {
             get
             {
-                return items.GetUpperBound(1) + 1;
+                return cells.GetUpperBound(1) + 1;
             }
         }
 
@@ -70,10 +78,15 @@ namespace HomeWork8.Figures
             */
 
             string str = "";
+            int count = 0;
 
-            foreach (Figure item in items)
+            foreach (Figure item in figures)
             {
-                str += $"{item?.ToString()}\n";
+                if (item is null == false)
+                {
+                    count += 1;
+                    str += $"{Array.IndexOf(figures, item)}.{item.ToString()}\n";
+                }
             }
             return str;
         }

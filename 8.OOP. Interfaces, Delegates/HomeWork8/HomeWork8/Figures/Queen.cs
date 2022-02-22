@@ -10,11 +10,7 @@ namespace HomeWork8.Figures
     {
         public override string ToString()
         {
-            return "QUENN";
-        }
-        public override void Step(int x, int y)
-        {
-
+            return $"QUEEN({x},{y})";
         }
     }
 }
